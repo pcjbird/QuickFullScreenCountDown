@@ -7,7 +7,6 @@
 //
 
 #import "QuickFullScreenCountDown.h"
-#import <AVFoundation/AVFoundation.h>
 
 #define APP_BACKGROUNDMODES ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIBackgroundModes"])
 #define SDK_RAISE_EXCEPTION(msg) ([NSException raise:@"[⌚️QuickFullScreenCountDown]" format:@"%@ 【class name:%@, line:%@】",(msg),@(__PRETTY_FUNCTION__),@(__LINE__)])
@@ -258,7 +257,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
                 }
                 else
                 {
-                    weakSelf.label.text = [NSString stringWithFormat:@"%ld", second];
+                    weakSelf.label.text = [NSString stringWithFormat:@"%@", @(second)];
                 }
                 [weakSelf animation];
                 second--;
