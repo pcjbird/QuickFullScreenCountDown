@@ -64,11 +64,6 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 
 -(void) initVariables
 {
-    if(![APP_BACKGROUNDMODES isKindOfClass:[NSArray class]] || [APP_BACKGROUNDMODES count] < 1)
-    {
-        SDK_RAISE_EXCEPTION(@"请在Info.plist中添加\"Required background modes\"键, 并添加子项: App plays audio or streams audio/video using AirPlay");
-        return;
-    }
     self.number = 3;
     self.endTitle = @"";
     self.font = [UIFont systemFontOfSize:[UIScreen mainScreen].bounds.size.width * 0.3];
@@ -231,6 +226,13 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 
 - (void)play
 {
+    if(![APP_BACKGROUNDMODES isKindOfClass:[NSArray class]] || [APP_BACKGROUNDMODES count] < 1)
+    {
+        NSLog(@"请在Info.plist中添加\"Required background modes\"键, 并添加子项: App plays audio or streams audio/video using AirPlay");
+        [self removeFromSuperview];
+        SDK_RAISE_EXCEPTION(@"请在Info.plist中添加\"Required background modes\"键, 并添加子项: App plays audio or streams audio/video using AirPlay");
+        return;
+    }
     [self playNumberAction];
     [self setCircleBackView];
 }
