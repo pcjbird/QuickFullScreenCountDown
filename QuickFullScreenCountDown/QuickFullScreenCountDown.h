@@ -8,6 +8,9 @@
 //  框架名称:QuickFullScreenCountDown
 //  框架功能:A full screen count down view for iOS. 一款全屏倒计时视图，须在Info.plist中增加后台模式支持, 常见于运动类 App 中。
 //  修改记录:
+//     pcjbird    2018-06-26  Version:1.0.3 Build:201806260004
+//                            1.修正无法设置背景色的问题。
+//
 //     pcjbird    2018-06-26  Version:1.0.2 Build:201806260003
 //                            1.修正 Info.plist 未配置错误提示。
 //
@@ -64,7 +67,7 @@ typedef void(^QuickFullScreenCountDownSuccessBlock)(QuickFullScreenCountDown *co
  * @brief 设置背景颜色
  * @param color 背景颜色
  */
-+ (void)setBackgroundColor:(UIColor*)color;
++ (void)setBackColor:(UIColor*)color;
 
 /**
  * @brief 播放

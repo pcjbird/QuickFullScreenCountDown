@@ -132,9 +132,9 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
  * @brief 设置背景颜色
  * @param color 背景颜色
  */
-+ (void)setBackgroundColor:(UIColor*)color
++ (void)setBackColor:(UIColor*)color
 {
-    [QuickFullScreenCountDown instance].backgroundColor = color;
+    [QuickFullScreenCountDown instance].backColor = color;
 }
 
 /**
