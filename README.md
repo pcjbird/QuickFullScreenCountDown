@@ -29,10 +29,9 @@ pod 'QuickFullScreenCountDown'
 
 ## 使用 / Usage
   
-  ```
-  [QuickFullScreenCountDown play];
-  
-  ``` 
+```
+QuickFullScreenCountDown play];
+``` 
 
 
 ## 关注我们 / Follow us
