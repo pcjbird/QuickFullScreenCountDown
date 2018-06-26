@@ -37,7 +37,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
         if (!_sharedInstance) {
             _sharedInstance = [[self alloc] init];
         }
-    }
+    };
     if ([NSThread isMainThread])
     {
         dispatch_once(&onceToken, instanceBlock);
@@ -149,6 +149,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 + (instancetype)play
 {
     [QuickFullScreenCountDown playWithNumber:[QuickFullScreenCountDown instance].number endTitle:@"" begin:nil success:nil];
+    return [QuickFullScreenCountDown instance];
 }
 
 /**
@@ -158,6 +159,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 + (instancetype)playWithNumber:(NSInteger)number
 {
     [QuickFullScreenCountDown playWithNumber:number endTitle:@"" begin:nil success:nil];
+    return [QuickFullScreenCountDown instance];
 }
 
 /**
@@ -168,6 +170,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 + (instancetype)playWithNumber:(NSInteger)number endTitle:(NSString *)endTitle
 {
     [QuickFullScreenCountDown playWithNumber:number endTitle:endTitle begin:nil success:nil];
+    return [QuickFullScreenCountDown instance];
 }
 
 /**
@@ -178,6 +181,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 + (instancetype)playWithNumber:(NSInteger)number success:(QuickFullScreenCountDownSuccessBlock)success
 {
     [QuickFullScreenCountDown playWithNumber:number endTitle:@"" begin:nil success:success];
+    return [QuickFullScreenCountDown instance];
 }
 
 /**
@@ -189,6 +193,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 + (instancetype)playWithNumber:(NSInteger)number endTitle:(NSString *)endTitle success:(QuickFullScreenCountDownSuccessBlock)success
 {
     [QuickFullScreenCountDown playWithNumber:number endTitle:endTitle begin:nil success:success];
+    return [QuickFullScreenCountDown instance];
 }
 
 /**
@@ -222,6 +227,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
     [QuickFullScreenCountDown instance].frame = [UIScreen mainScreen].bounds;
     [[UIApplication sharedApplication].keyWindow addSubview:[QuickFullScreenCountDown instance]];
     [[QuickFullScreenCountDown instance] play];
+    return [QuickFullScreenCountDown instance];
 }
 
 - (void)play
