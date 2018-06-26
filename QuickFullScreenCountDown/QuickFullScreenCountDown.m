@@ -251,7 +251,8 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
     dispatch_source_set_event_handler(timer, ^{
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (second >= 0) {
+            if (second > 0 || (second == 0 && [weakSelf.endTitle isKindOfClass:[NSString class]] && [weakSelf.endTitle length] > 0))
+            {
                 
                 if (second == 0)
                 {

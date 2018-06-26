@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
     s.name             = "QuickFullScreenCountDown"
-    s.version          = "1.0.3"
+    s.version          = "1.0.4"
     s.summary          = "A full screen count down view for iOS. 一款全屏倒计时视图，须在Info.plist中增加后台模式支持, 常见于运动类 App 中。"
     s.description      = <<-DESC
-    A full screen count down view for iOS. 一款全屏倒计时视图，须在Info.plist中增加后台模式支持。
+    A full screen count down view for iOS. 一款全屏倒计时视图，须在Info.plist中增加后台模式支持, 常见于运动类 App 中, 支持自定义背景色/前景色/数字字体/倒计时结束显示字符等。
     DESC
     s.homepage         = "https://github.com/pcjbird/QuickFullScreenCountDown"
     s.license          = 'MIT'
