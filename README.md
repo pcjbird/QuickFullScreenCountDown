@@ -30,7 +30,7 @@ pod 'QuickFullScreenCountDown'
 ## 使用 / Usage
   
 ```
-QuickFullScreenCountDown play];
+[QuickFullScreenCountDown play];
 ``` 
 
 
