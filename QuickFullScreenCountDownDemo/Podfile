@@ -1,0 +1,14 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'
+
+workspace 'QuickFullScreenCountDownDemo.xcworkspace'
+project 'QuickFullScreenCountDownDemo.xcodeproj'
+
+target 'QuickFullScreenCountDownDemo' do
+  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for QuickFullScreenCountDownDemo
+  pod 'QuickFullScreenCountDown'
+  pod 'Wonderful'
+end

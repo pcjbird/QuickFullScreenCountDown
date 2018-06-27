@@ -19,6 +19,10 @@
 3. 支持自定义背景色/前景色/数字字体/倒计时结束显示字符等。
 4. 支持block回调。
 
+## 演示 / Demo
+
+<p align="center"><img src="demo.gif" title="demo"></p>
+
 ##  安装 / Installation
 
 方法一：`QuickFullScreenCountDown` is available through CocoaPods. To install it, simply add the following line to your Podfile:
