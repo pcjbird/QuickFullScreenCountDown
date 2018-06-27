@@ -6,8 +6,11 @@
 //  Copyright © 2018年 Zero Status. All rights reserved.
 //
 //  框架名称:QuickFullScreenCountDown
-//  框架功能:A full screen count down view for iOS. 一款全屏倒计时视图，须在Info.plist中增加后台模式支持, 常见于运动类 App 中。
+//  框架功能:A full screen count down view for iOS. 一款全屏倒计时视图, 常见于运动类 App 中。
 //  修改记录:
+//     pcjbird    2018-06-27  Version:1.0.5 Build:201806270001
+//                            1.支持设置UI后台模式是否继续运行。
+//
 //     pcjbird    2018-06-26  Version:1.0.4 Build:201806260005
 //                            1.当 endTitle 为空时直接跳过。
 //
@@ -55,6 +58,12 @@ typedef void(^QuickFullScreenCountDownSuccessBlock)(QuickFullScreenCountDown *co
 @interface QuickFullScreenCountDown : UIView
 
 /**
+ * @brief UI后台模式是否继续运行, 默认 YES
+ * @since v1.0.5
+ */
+@property(nonatomic, readonly) BOOL   shouldContinueWithUIBackgroundModes;
+
+/**
  * @brief 设置数字颜色
  * @param color 数字颜色
  */
@@ -71,6 +80,13 @@ typedef void(^QuickFullScreenCountDownSuccessBlock)(QuickFullScreenCountDown *co
  * @param color 背景颜色
  */
 + (void)setBackColor:(UIColor*)color;
+
+/**
+ * @brief 设置UI后台模式是否继续运行
+ * @param bContinue 是否继续
+ * @since v1.0.5
+ */
++ (void)setContinueWithUIBackgroundModes:(BOOL)bContinue;
 
 /**
  * @brief 播放

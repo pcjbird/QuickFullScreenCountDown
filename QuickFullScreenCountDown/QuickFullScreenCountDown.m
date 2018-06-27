@@ -13,6 +13,8 @@
 
 @interface QuickFullScreenCountDown()
 
+@property(nonatomic, assign) BOOL   shouldContinueWithUIBackgroundModes;
+
 @property(nonatomic, assign) NSInteger number;
 @property(nonatomic, strong) NSString* endTitle;
 @property(nonatomic, strong) UIFont * font;
@@ -64,6 +66,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 
 -(void) initVariables
 {
+    self.shouldContinueWithUIBackgroundModes = YES;
     self.number = 3;
     self.endTitle = @"";
     self.font = [UIFont systemFontOfSize:[UIScreen mainScreen].bounds.size.width * 0.3];
@@ -76,9 +79,12 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 -(void)didMoveToSuperview
 {
     [super didMoveToSuperview];
-    NSError *error = nil;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
-    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    if(self.shouldContinueWithUIBackgroundModes)
+    {
+        NSError *error = nil;
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+        [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnAppEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
@@ -90,24 +96,27 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 
 -(void)OnAppEnterBackground:(NSNotification*)notifiaction
 {
-    UIApplication*   app = [UIApplication sharedApplication];
-    __block    UIBackgroundTaskIdentifier bgTask;
-    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
+    if(self.shouldContinueWithUIBackgroundModes)
+    {
+        UIApplication*   app = [UIApplication sharedApplication];
+        __block    UIBackgroundTaskIdentifier bgTask;
+        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTask != UIBackgroundTaskInvalid)
+                {
+                    bgTask = UIBackgroundTaskInvalid;
+                }
+            });
+        }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTask != UIBackgroundTaskInvalid)
+                {
+                    bgTask = UIBackgroundTaskInvalid;
+                }
+            });
         });
-    }];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    });
+    }
 }
 
 /**
@@ -135,6 +144,16 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 + (void)setBackColor:(UIColor*)color
 {
     [QuickFullScreenCountDown instance].backColor = color;
+}
+
+/**
+ * @brief 设置UI后台模式是否继续运行
+ * @param bContinue 是否继续
+ * @since v1.0.5
+ */
++ (void)setContinueWithUIBackgroundModes:(BOOL)bContinue
+{
+    [QuickFullScreenCountDown instance].shouldContinueWithUIBackgroundModes = bContinue;
 }
 
 /**
@@ -226,7 +245,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 
 - (void)play
 {
-    if(![APP_BACKGROUNDMODES isKindOfClass:[NSArray class]] || [APP_BACKGROUNDMODES count] < 1)
+    if(self.shouldContinueWithUIBackgroundModes && (![APP_BACKGROUNDMODES isKindOfClass:[NSArray class]] || [APP_BACKGROUNDMODES count] < 1))
     {
         NSLog(@"请在Info.plist中添加\"Required background modes\"键, 并添加子项: App plays audio or streams audio/video using AirPlay");
         [self removeFromSuperview];
