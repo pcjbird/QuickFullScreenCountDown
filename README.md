@@ -10,7 +10,7 @@
 [![Website](https://img.shields.io/website-pcjbird-down-green-red/https/shields.io.svg?label=author)](https://pcjbird.github.io)
 
 # QuickFullScreenCountDown
-### A full screen count down view for iOS. 一款全屏倒计时视图，须在Info.plist中增加后台模式支持, 常见于运动类 App 中。
+### A full screen count down view for iOS. 一款全屏倒计时视图, 常见于运动类 App 中。
 
 ## 特性 / Features
 
