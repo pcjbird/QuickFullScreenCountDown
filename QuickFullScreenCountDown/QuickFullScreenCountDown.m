@@ -107,6 +107,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (bgTask != UIBackgroundTaskInvalid)
                 {
+                    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
                     bgTask = UIBackgroundTaskInvalid;
                 }
             });
@@ -115,6 +116,7 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (bgTask != UIBackgroundTaskInvalid)
                 {
+                    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
                     bgTask = UIBackgroundTaskInvalid;
                 }
             });
