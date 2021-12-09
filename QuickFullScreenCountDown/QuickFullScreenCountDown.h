@@ -8,6 +8,9 @@
 //  框架名称:QuickFullScreenCountDown
 //  框架功能:A full screen count down view for iOS. 一款全屏倒计时视图, 常见于运动类 App 中。
 //  修改记录:
+//     pcjbird    2021-12-09  Version:1.0.9 Build:202112090003
+//                            1.修正后台任务处理的问题。
+//
 //     pcjbird    2021-12-09  Version:1.0.8 Build:202112090002
 //                            1.修正后台任务处理的问题。
 //

@@ -101,25 +101,21 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
 {
     if(self.shouldContinueWithUIBackgroundModes)
     {
-        UIApplication*   app = [UIApplication sharedApplication];
-        __block    UIBackgroundTaskIdentifier bgTask;
+        __block UIApplication* app = [UIApplication sharedApplication];
+        __block UIBackgroundTaskIdentifier bgTask;
         bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (bgTask != UIBackgroundTaskInvalid)
-                {
-                    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-                    bgTask = UIBackgroundTaskInvalid;
-                }
-            });
+            if (bgTask != UIBackgroundTaskInvalid)
+            {
+                [app endBackgroundTask:bgTask];
+                bgTask = UIBackgroundTaskInvalid;
+            }
         }];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (bgTask != UIBackgroundTaskInvalid)
-                {
-                    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
-                    bgTask = UIBackgroundTaskInvalid;
-                }
-            });
+            if (bgTask != UIBackgroundTaskInvalid)
+            {
+                [app endBackgroundTask:bgTask];
+                bgTask = UIBackgroundTaskInvalid;
+            }
         });
     }
 }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "QuickFullScreenCountDown"
-    s.version          = "1.0.8"
+    s.version          = "1.0.9"
     s.summary          = "A full screen count down view for iOS. 一款全屏倒计时视图, 常见于运动类 App 中。"
     s.description      = <<-DESC
     A full screen count down view for iOS. 一款全屏倒计时视图, 常见于运动类 App 中, 支持自定义背景色/前景色/数字字体/倒计时结束显示字符等。
