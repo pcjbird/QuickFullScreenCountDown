@@ -76,16 +76,19 @@ static QuickFullScreenCountDown* _sharedInstance = nil;
     self.beginBlock = nil;
 }
 
--(void)didMoveToSuperview
+- (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [super didMoveToSuperview];
-    if(self.shouldContinueWithUIBackgroundModes)
+    [super willMoveToSuperview:newSuperview];
+    if([newSuperview isKindOfClass:[UIView class]])
     {
-        NSError *error = nil;
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
-        [[AVAudioSession sharedInstance] setActive:YES error:&error];
+        if(self.shouldContinueWithUIBackgroundModes)
+        {
+            NSError *error = nil;
+            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+            [[AVAudioSession sharedInstance] setActive:YES error:&error];
+        }
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnAppEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnAppEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 -(void)removeFromSuperview
